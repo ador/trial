@@ -28,7 +28,7 @@
 set -o pipefail
 this_dir="$(dirname "$0")"
 
-gradle_version="2.1"
+gradle_version="2.3"
 gradle_download_url="https://services.gradle.org/distributions/gradle-${gradle_version}-all.zip"
 gradle_install_dir="$HOME/gradle-${gradle_version}-install"
 gradle_home="${gradle_install_dir}/gradle-${gradle_version}/"
