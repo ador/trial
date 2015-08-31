@@ -60,6 +60,13 @@ pushd "${install_dir}" > "/dev/null"
   echo "Extracting package..."
   tar zxvf node-v${node_version}.tar.gz -C . > "/dev/null"
   echo "...done"
+  echo "Compiling... "
+  pushd node-v${node_version} > "/dev/null"
+    ./configure
+    make
+    make install
+  popd > "/dev/null"
+  echo "...done"
 popd > "/dev/null"
 
 mkdir -p ${node_home}
