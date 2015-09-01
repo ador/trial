@@ -32,7 +32,7 @@ this_dir="$(dirname "$0")"
 node_version="0.12.7"
 download_url="https://nodejs.org/dist/v0.12.7/node-v${node_version}.tar.gz"
 install_dir="$HOME/nodejs-${node_version}-install"
-node_home="$HOME/nodejs-${node_version}"
+node_bin_dir=${install_dir}/bin
 
 escape_string () 
 {
@@ -62,21 +62,20 @@ pushd "${install_dir}" > "/dev/null"
   echo "...done"
   echo "Compiling... "
   pushd node-v${node_version} > "/dev/null"
-    ./configure
+    ./configure --prefix=${install_dir}
     make
     make install
   popd > "/dev/null"
   echo "...done"
 popd > "/dev/null"
 
-mkdir -p ${node_home}
+mkdir -p ${node_bin_dir}
 
 # maybe it does not exist yet
 touch ~/.bashrc
 
 d_bashrc_lines="$(cat << BASHRC_LINES
-export NODE_HOME=$(escape_string "$node_home")
-export PATH=$(escape_string "$node_home/bin"):"\$PATH"
+export PATH=$(escape_string "$node_bin_dir"):"\$PATH"
 BASHRC_LINES
 )"
 
