@@ -60,7 +60,7 @@ with open(infile, 'r') as f:
             out.write(str(isRetweet(tweet)) + sep)
             out.write(str(getLang(tweet)) + sep)
             # out.write(str(getCountry(tweet)) + sep)
-            out.write(str(tweet['text'].encode('utf-8')))
+            out.write(repr(str(tweet['text'].encode('utf-8'))))
             out.write("\n")
 
         
