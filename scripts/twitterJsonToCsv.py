@@ -9,28 +9,30 @@ out = open(outfilename, 'w')
 
 def processSource(sourceStr):
     source = sourceStr.lower()
-    apple = ["for mac", "iphone", "ios", "ipad"]
-    for s in apple:
-        if s in source:
-            return "apple-device"
-    automated = ["hootsuite", "ifttt", "roundteam"]
-    for s in automated:
-        if s in source:
-            return "automated"
+    listOfAppleDevices = ["iphone", "ipad", "for ios", "for mac"]
+    listOfAutoTools = ["ifttt", "dlvr.it", "hootsuite", "twitterfeed", "tweetbot", "twittbot", "roundteam", "hubspot", "socialoomph" ]
+    listOfSocialPlatforms = ["facebook", "linkedin", "tumblr"]
+    listOfOtherMobile = ["windows phone", "mobile web", "for blackberry"]
     if "android" in source:
         return "android"
-    if "windows" in source:
-        return "windows"
-    if "facebook" in source or "linkedin" in source:
-        return "socialsite"
-    if "mobile" in source or "blackberry" in source:
-        return "mobile"
-    if "web client" in source:
-        return "webclient"
+    for apple in listOfAppleDevices:
+        if apple in source:
+            return "appledevice"
     if "tweetdeck" in source:
         return "tweetdeck"
-    else:
-        return "other"
+    if "twitter web client" in source:
+        return "webclient"
+    for soc in listOfSocialPlatforms:
+        if soc in source:
+            return "socialsite"
+    for autoTool in listOfAutoTools:
+        if autoTool in source:
+            return "automated"
+    for i in listOfOtherMobile:
+        if i in source:
+            return "othermobile"
+    print(sourceStr)
+    return "other"
 
 def isRetweet(tweet):
     if 'retweeted_status' in tweet:
