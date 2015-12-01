@@ -10,8 +10,8 @@ out = open(outfilename, 'w')
 def processSource(sourceStr):
     source = sourceStr.lower()
     listOfAppleDevices = ["iphone", "ipad", "for ios", "for mac"]
-    listOfAutoTools = ["ifttt", "dlvr.it", "hootsuite", "twitterfeed", "tweetbot", "twittbot", "roundteam", "hubspot", "socialoomph" ]
-    listOfSocialPlatforms = ["facebook", "linkedin", "tumblr"]
+    listOfAutoTools = ["ifttt", "dlvr.it", "hootsuite", "twitterfeed", "tweetbot", "twittbot", "roundteam", "hubspot", "socialoomph", "smqueue", "linkis.com"]
+    listOfSocialPlatforms = ["facebook", "linkedin", "tumblr", "wordpress"]
     listOfOtherMobile = ["windows phone", "mobile web", "for blackberry"]
     if "android" in source:
         return "android"
@@ -40,6 +40,19 @@ def isRetweet(tweet):
             return True
     return False
 
+def getRetweetedTweetLikesNum(tweet):
+    if isRetweet(tweet):
+        return int(tweet['retweeted_status']['favorite_count'])
+    else:
+        return 0
+
+def getRetweetedTweetRTNum(tweet):
+    if isRetweet(tweet):
+        return int(tweet['retweeted_status']['retweet_count'])
+    else:
+        return 0
+
+
 def getLang(tweet):
     if 'lang' in tweet:
         return tweet['lang']
@@ -60,6 +73,8 @@ with open(infile, 'r') as f:
             out.write(str(tweet['created_at']) + sep)
             out.write(str(processSource(tweet['source'])) + sep)
             out.write(str(isRetweet(tweet)) + sep)
+            out.write(str(getRetweetedTweetLikesNum(tweet)) + sep)
+            out.write(str(getRetweetedTweetRTNum(tweet)) + sep)
             out.write(str(getLang(tweet)) + sep)
             # out.write(str(getCountry(tweet)) + sep)
             out.write(repr(str(tweet['text'].encode('utf-8'))))
