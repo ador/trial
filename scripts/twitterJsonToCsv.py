@@ -41,9 +41,12 @@ def processSource(sourceStr):
 def isNiceRetweet(tweet):
     if 'retweeted_status' in tweet and tweet['retweeted_status'] != None:
         rts = tweet['retweeted_status']
-        if ('favorite_count' in rts and 'retweet_count' in rts and
-                'created_at' in rts and 'source' in rts and 'user' in rts and
-                'followers_count' in rts['user']):
+        if ('favorite_count' in rts and rts['favorite_count'] != None and
+                'retweet_count' in rts and rts['retweet_count'] != None and
+                'created_at' in rts and rts['created_at'] != None and 
+                'source' in rts and rts['source'] != None and
+                'user' in rts and rts['user'] != None and 
+                'followers_count' in rts['user'] and rts['user']['followers_count'] != None):
             return True
     return False
 
