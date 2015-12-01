@@ -9,9 +9,9 @@ out = open(outfilename, 'w')
 
 def processSource(sourceStr):
     source = sourceStr.lower()
-    listOfAppleDevices = ["iphone", "ipad", "for ios", "for mac"]
-    listOfAutoTools = ["ifttt", "dlvr.it", "hootsuite", "twitterfeed", "tweetbot", "twittbot", "roundteam", "hubspot", "socialoomph", "smqueue", "linkis.com"]
-    listOfSocialPlatforms = ["facebook", "linkedin", "tumblr", "wordpress"]
+    listOfAppleDevices = ["iphone", "ipad", "for ios", "for mac", "os x"]
+    listOfAutoTools = ["ifttt", "dlvr.it", "hootsuite", "twitterfeed", "tweetbot", "twittbot", "roundteam", "hubspot", "socialoomph", "smqueue", "linkis.com", "tweet jukebox", "tweetsuite", "bufferapp", "thousandtweets"]
+    listOfSocialPlatforms = ["facebook", "linkedin", "tumblr", "wordpress", "instagram"]
     listOfOtherMobile = ["windows phone", "mobile web", "for blackberry"]
     if "android" in source:
         return "android"
@@ -50,8 +50,7 @@ def getRetweetedTweetRTNum(tweet):
     if isRetweet(tweet):
         return int(tweet['retweeted_status']['retweet_count'])
     else:
-        return 0
-
+        return 0 
 
 def getLang(tweet):
     if 'lang' in tweet:
