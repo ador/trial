@@ -9,9 +9,9 @@ out = open(outfilename, 'w')
 
 def processSource(sourceStr):
     source = sourceStr.lower()
-    listOfAppleDevices = ["iphone", "ipad", "for ios", "for mac", "os x"]
-    listOfAutoTools = ["ifttt", "dlvr.it", "hootsuite", "twitterfeed", "tweetbot", "twittbot", "roundteam", "hubspot", "socialoomph", "smqueue", "linkis.com", "tweet jukebox", "tweetsuite", "bufferapp", "thousandtweets"]
-    listOfSocialPlatforms = ["facebook", "linkedin", "tumblr", "wordpress", "instagram"]
+    listOfAppleDevices = ["iphone", "ipad", "for ios", "for mac", "os x", "apple.com"]
+    listOfAutoTools = ["ifttt", "dlvr.it", "hootsuite", "twitterfeed", "tweetbot", "twittbot", "roundteam", "hubspot", "socialoomph", "smqueue", "linkis.com", "tweet jukebox", "tweetsuite", "bufferapp", "thousandtweets", "postplanner", "manageflitter"]
+    listOfSocialPlatforms = ["facebook", "linkedin", "tumblr", "wordpress", "instagram", "pinterest"]
     listOfOtherMobile = ["windows phone", "mobile web", "for blackberry"]
     if "android" in source:
         return "android"
