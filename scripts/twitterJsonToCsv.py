@@ -49,7 +49,7 @@ def isNiceRetweet(tweet):
 
 def getRetweetedTweetId(tweet, isRetweet):
     if isRetweet:
-        return tweet['retweeted_status']['id'])
+        return tweet['retweeted_status']['id']
     else:
         return None
 
@@ -67,8 +67,8 @@ def getRetweetedTweetRTNum(tweet, isRetweet):
 
 def getRetweetedTweetSource(tweet, isRetweet):
     if isRetweet:
-        rts = tweet['retweeted_status']
-        return processSource(rts)
+        rtstr = tweet['retweeted_status']['source']
+        return processSource(rtstr)
     else: 
         return None
 
@@ -94,7 +94,7 @@ with open(infile, 'r') as f:
             out.write(str(processSource(tweet['source'])) + sep)
             out.write(str(getLang(tweet)) + sep)
             isRetweet = isNiceRetweet(tweet)
-            out.write(str(isRetweet + sep)
+            out.write(str(isRetweet) + sep)
             out.write(str(getRetweetedTweetId(tweet, isRetweet)) + sep)
             out.write(str(getRetweetedTweetLikesNum(tweet, isRetweet)) + sep)
             out.write(str(getRetweetedTweetRTNum(tweet, isRetweet)) + sep)
