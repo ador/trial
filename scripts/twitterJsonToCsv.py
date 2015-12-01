@@ -10,8 +10,12 @@ out = open(outfilename, 'w')
 def processSource(sourceStr):
     source = sourceStr.lower()
     listOfAppleDevices = ["iphone", "ipad", "for ios", "for mac", "os x", "apple.com"]
-    listOfAutoTools = ["ifttt", "dlvr.it", "hootsuite", "twitterfeed", "tweetbot", "twittbot", "roundteam", "hubspot", "socialoomph", "smqueue", "linkis.com", "tweet jukebox", "tweetsuite", "bufferapp", "thousandtweets", "postplanner", "manageflitter", "crowdfire"]
-    listOfSocialPlatforms = ["facebook", "linkedin", "tumblr", "wordpress", "instagram", "pinterest"]
+    listOfAutoTools = ["ifttt", "dlvr.it", "hootsuite", "twitterfeed", "tweetbot",
+                       "twittbot", "roundteam", "hubspot", "socialoomph", "smqueue",
+                       "linkis.com", "tweet jukebox", "tweetsuite", "bufferapp",
+                       "thousandtweets", "postplanner", "manageflitter", "crowdfire"]
+    listOfSocialPlatforms = ["facebook", "linkedin", "tumblr", "wordpress",
+                             "instagram", "pinterest"]
     listOfOtherMobile = ["windows phone", "mobile web", "for blackberry"]
     if "android" in source:
         return "android"
@@ -34,48 +38,68 @@ def processSource(sourceStr):
     print(sourceStr)
     return "other"
 
-def isRetweet(tweet):
-    if 'retweeted_status' in tweet:
-        if tweet['retweeted_status'] != None and len(tweet['retweeted_status']) > 0:
+def isNiceRetweet(tweet):
+    if 'retweeted_status' in tweet and tweet['retweeted_status'] != None:
+        rts = tweet['retweeted_status']
+        if ('favorite_count' in rts and 'retweet_count' in rts and
+                'created_at' in rts and 'source' in rts and 'user' in rts and
+                'followers_count' in rts['user']):
             return True
     return False
 
-def getRetweetedTweetLikesNum(tweet):
-    if isRetweet(tweet):
+def getRetweetedTweetId(tweet, isRetweet):
+    if isRetweet:
+        return tweet['retweeted_status']['id'])
+    else:
+        return None
+
+def getRetweetedTweetLikesNum(tweet, isRetweet):
+    if isRetweet:
         return int(tweet['retweeted_status']['favorite_count'])
     else:
         return 0
 
-def getRetweetedTweetRTNum(tweet):
-    if isRetweet(tweet):
+def getRetweetedTweetRTNum(tweet, isRetweet):
+    if isRetweet:
         return int(tweet['retweeted_status']['retweet_count'])
     else:
-        return 0 
+        return 0
+
+def getRetweetedTweetSource(tweet, isRetweet):
+    if isRetweet:
+        rts = tweet['retweeted_status']
+        return processSource(rts)
+    else: 
+        return None
+
+def getRetweetedTweetAuthorFollowerCount(tweet, isRetweet):
+    if isRetweet:
+        rts = tweet['retweeted_status']
+        return rts['user']['followers_count']
+    else: 
+        return 0
 
 def getLang(tweet):
     if 'lang' in tweet:
         return tweet['lang']
     return None
 
-def getCountry(tweet):
-    if 'place' in tweet and tweet['place'] != None:
-        if 'country' in tweet['place']:
-            return tweet['place']['country']
-    return None
 
 with open(infile, 'r') as f:
     for line in f:
         tweet = json.loads(unicode(line.encode('utf-8'), 'utf-8'))
         if "source" in tweet.keys():
             out.write(str(tweet['id']) + sep)
-            out.write(str(tweet['timestamp_ms']) + sep)
             out.write(str(tweet['created_at']) + sep)
             out.write(str(processSource(tweet['source'])) + sep)
-            out.write(str(isRetweet(tweet)) + sep)
-            out.write(str(getRetweetedTweetLikesNum(tweet)) + sep)
-            out.write(str(getRetweetedTweetRTNum(tweet)) + sep)
             out.write(str(getLang(tweet)) + sep)
-            # out.write(str(getCountry(tweet)) + sep)
+            isRetweet = isNiceRetweet(tweet)
+            out.write(str(isRetweet + sep)
+            out.write(str(getRetweetedTweetId(tweet, isRetweet)) + sep)
+            out.write(str(getRetweetedTweetLikesNum(tweet, isRetweet)) + sep)
+            out.write(str(getRetweetedTweetRTNum(tweet, isRetweet)) + sep)
+            out.write(str(getRetweetedTweetSource(tweet, isRetweet)) + sep)
+            out.write(str(getRetweetedTweetAuthorFollowerCount(tweet, isRetweet)) + sep)
             out.write(repr(str(tweet['text'].encode('utf-8'))))
             out.write("\n")
 
