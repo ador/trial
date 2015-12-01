@@ -56,6 +56,12 @@ def getRetweetedTweetId(tweet, isRetweet):
     else:
         return None
 
+def getRetweetedTweetTime(tweet, isRetweet):
+    if isRetweet:
+        return tweet['retweeted_status']['created_at']
+    else:
+        return None
+
 def getRetweetedTweetLikesNum(tweet, isRetweet):
     if isRetweet:
         return int(tweet['retweeted_status']['favorite_count'])
@@ -99,6 +105,7 @@ with open(infile, 'r') as f:
             isRetweet = isNiceRetweet(tweet)
             out.write(str(isRetweet) + sep)
             out.write(str(getRetweetedTweetId(tweet, isRetweet)) + sep)
+            out.write(str(getRetweetedTweetTime(tweet, isRetweet)) + sep)
             out.write(str(getRetweetedTweetLikesNum(tweet, isRetweet)) + sep)
             out.write(str(getRetweetedTweetRTNum(tweet, isRetweet)) + sep)
             out.write(str(getRetweetedTweetSource(tweet, isRetweet)) + sep)
