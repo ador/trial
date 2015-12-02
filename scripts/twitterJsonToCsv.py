@@ -1,8 +1,14 @@
 import json
 import codecs
+import sys
 
-infile = "data/streamed_book_tw_100.json"
-outfilename = "data/streamed_book_tw_100.csv"
+if len(sys.argv) != 3:
+    print('Usage: ' + sys.argv[0] + " <input json path> <output csv path>")
+    exit()
+
+
+infilename = sys.argv[1]
+outfilename = sys.argv[2]
 sep = "|"
 
 out = open(outfilename, 'w')
@@ -35,7 +41,6 @@ def processSource(sourceStr):
     for i in listOfOtherMobile:
         if i in source:
             return "othermobile"
-    print(sourceStr)
     return "other"
 
 def isNiceRetweet(tweet):
@@ -94,7 +99,7 @@ def getLang(tweet):
     return None
 
 
-with open(infile, 'r') as f:
+with open(infilename, 'r') as f:
     for line in f:
         tweet = json.loads(unicode(line.encode('utf-8'), 'utf-8'))
         if "source" in tweet.keys():
@@ -112,6 +117,3 @@ with open(infile, 'r') as f:
             out.write(str(getRetweetedTweetAuthorFollowerCount(tweet, isRetweet)) + sep)
             out.write(repr(str(tweet['text'].encode('utf-8'))))
             out.write("\n")
-
-        
-        
