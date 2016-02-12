@@ -154,13 +154,14 @@ Then, on gpu4 connect them to form a new replica set:
 #### Create a MongoDB router (mongos)
 
 Last step! Starting "mongos" on gpu3 (where the ycsb client will run), using the default mongodb port 27017.
-Note: after the "--configdb" you have to specify <replica set name of the config server>/<address of one member of the config server Replica Set>
+Note: after the "--configdb" you have to specify \<replica set name of the config server\>/\<address of one member of the config server Replica Set\>
 
 On gpu3:
 
     $ sudo mongos --port 27017 --configdb config/192.168.0.4:27151,192.168.0.5:27152,192.168.0.6:27153
     
 Then connect to it and add the data shards:
+
     $ mongo --host localhost --port 27017
     > sh.addShard("data1/192.168.0.3:27111")
     > sh.addShard("data2/192.168.0.4:27121")
