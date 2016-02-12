@@ -158,8 +158,14 @@ Note: after the "--configdb" you have to specify <replica set name of the config
 
 On gpu3:
 
-    $ sudo mongos --port 27017 --configdb config/192.168.0.4:27151
-
+    $ sudo mongos --port 27017 --configdb config/192.168.0.4:27151,192.168.0.5:27152,192.168.0.6:27153
+    
+Then connect to it and add the data shards:
+    $ mongo --host localhost --port 27017
+    > sh.addShard("data1/192.168.0.3:27111")
+    > sh.addShard("data2/192.168.0.4:27121")
+    > sh.addShard("data3/192.168.0.5:27131")
+    > sh.addShard("data4/192.168.0.6:27141")
 
 
 
