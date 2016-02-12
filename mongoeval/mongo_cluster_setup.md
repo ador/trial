@@ -5,36 +5,36 @@ On 4 machines with 512 GB SSDs and 32GB RAM, 8 cores each (gpu3, gpu4, gpu5, gpu
 #### Start the 4 shard cluster data nodes:
 
 gpu3: (192.168.0.3)
-$ sudo mkdir /home/mongodata
-$ sudo mkdir /home/mongodata3
-$ sudo mkdir /home/mongodata4
-$ sudo mongod --port 27111 --replSet data1 --shardsvr --dbpath /home/mongodata --wiredTigerCacheSizeGB 6
-$ sudo mongod --port 27133 --replSet data3 --shardsvr --dbpath /home/mongodata3 --wiredTigerCacheSizeGB 6
-$ sudo mongod --port 27142 --replSet data4 --shardsvr --dbpath /home/mongodata4 --wiredTigerCacheSizeGB 6
+    $ sudo mkdir /home/mongodata
+    $ sudo mkdir /home/mongodata3
+    $ sudo mkdir /home/mongodata4
+    $ sudo mongod --port 27111 --replSet data1 --shardsvr --dbpath /home/mongodata --wiredTigerCacheSizeGB 6
+    $ sudo mongod --port 27133 --replSet data3 --shardsvr --dbpath /home/mongodata3 --wiredTigerCacheSizeGB 6
+    $ sudo mongod --port 27142 --replSet data4 --shardsvr --dbpath /home/mongodata4 --wiredTigerCacheSizeGB 6
 
 gpu4: (192.168.0.4)
-$ sudo mkdir /home/mongodata
-$ sudo mkdir /home/mongodata2
-$ sudo mkdir /home/mongodata4
-$ sudo mongod --port 27112 --replSet data1 --shardsvr --dbpath /home/mongodata --wiredTigerCacheSizeGB 6
-$ sudo mongod --port 27121 --replSet data2 --shardsvr --dbpath /home/mongodata2 --wiredTigerCacheSizeGB 6
-$ sudo mongod --port 27144 --replSet data4 --shardsvr --dbpath /home/mongodata4 --wiredTigerCacheSizeGB 6
+    $ sudo mkdir /home/mongodata
+    $ sudo mkdir /home/mongodata2
+    $ sudo mkdir /home/mongodata4
+    $ sudo mongod --port 27112 --replSet data1 --shardsvr --dbpath /home/mongodata --wiredTigerCacheSizeGB 6
+    $ sudo mongod --port 27121 --replSet data2 --shardsvr --dbpath /home/mongodata2 --wiredTigerCacheSizeGB 6
+    $ sudo mongod --port 27144 --replSet data4 --shardsvr --dbpath /home/mongodata4 --wiredTigerCacheSizeGB 6
 
 gpu5: (192.168.0.5)
-$ sudo mkdir /home/mongodata
-$ sudo mkdir /home/mongodata2
-$ sudo mkdir /home/mongodata3
-$ sudo mongod --port 27113 --replSet data1 --shardsvr --dbpath /home/mongodata --wiredTigerCacheSizeGB 6
-$ sudo mongod --port 27122 --replSet data2 --shardsvr --dbpath /home/mongodata2 --wiredTigerCacheSizeGB 6
-$ sudo mongod --port 27131 --replSet data3 --shardsvr --dbpath /home/mongodata3 --wiredTigerCacheSizeGB 6
+    $ sudo mkdir /home/mongodata
+    $ sudo mkdir /home/mongodata2
+    $ sudo mkdir /home/mongodata3
+    $ sudo mongod --port 27113 --replSet data1 --shardsvr --dbpath /home/mongodata --wiredTigerCacheSizeGB 6
+    $ sudo mongod --port 27122 --replSet data2 --shardsvr --dbpath /home/mongodata2 --wiredTigerCacheSizeGB 6
+    $ sudo mongod --port 27131 --replSet data3 --shardsvr --dbpath /home/mongodata3 --wiredTigerCacheSizeGB 6
 
 gpu6: (192.168.0.6)
-$ sudo mkdir /home/mongodata2
-$ sudo mkdir /home/mongodata3
-$ sudo mkdir /home/mongodata4
-$ sudo mongod --port 27123 --replSet data2 --shardsvr --dbpath /home/mongodata2 --wiredTigerCacheSizeGB 6
-$ sudo mongod --port 27132 --replSet data3 --shardsvr --dbpath /home/mongodata3 --wiredTigerCacheSizeGB 6
-$ sudo mongod --port 27141 --replSet data4 --shardsvr --dbpath /home/mongodata4 --wiredTigerCacheSizeGB 6
+    $ sudo mkdir /home/mongodata2
+    $ sudo mkdir /home/mongodata3
+    $ sudo mkdir /home/mongodata4
+    $ sudo mongod --port 27123 --replSet data2 --shardsvr --dbpath /home/mongodata2 --wiredTigerCacheSizeGB 6
+    $ sudo mongod --port 27132 --replSet data3 --shardsvr --dbpath /home/mongodata3 --wiredTigerCacheSizeGB 6
+    $ sudo mongod --port 27141 --replSet data4 --shardsvr --dbpath /home/mongodata4 --wiredTigerCacheSizeGB 6
 
 
 #### Initialize the 4 shards as Replica Sets
