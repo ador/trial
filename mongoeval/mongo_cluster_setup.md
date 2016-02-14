@@ -167,6 +167,7 @@ Then connect to it and add the data shards:
     > sh.addShard("data2/192.168.0.4:27121")
     > sh.addShard("data3/192.168.0.5:27131")
     > sh.addShard("data4/192.168.0.6:27141")
+    > sh.status()
 
 
 
