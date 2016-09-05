@@ -8,4 +8,12 @@ var myfun1 = function(number, message) {
   }
 }
 
-myfun1(3, "Hello")
+var doTimes = function(number, func) {
+  var count = 0;
+  while (count < number) {
+    func(2, "Hello");
+    count += 1;
+  }
+}
+
+doTimes(3, myfun1);
