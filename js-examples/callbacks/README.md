@@ -1,4 +1,4 @@
-# Getting started with NodeJS
+# Getting started with JS callbacks
 
 ### Prerequisites
 Install node and npm (instructions are for ubuntu):
